@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import styles from "../utils/Styles";
 import { Header, Popup, ProductList } from "../component";
 import { color, icon } from "../utils/Constant";
@@ -31,7 +31,14 @@ const Home = () => {
       setSelectedItem(item);
       setShowPopup(true);
     }else{
-      deleteItem(item);
+      Alert.alert(
+        "Confirm Deletion", 
+        `Are you sure you want to delete "${item.name}"?`,
+        [
+          { text: "Cancel", style: "cancel" },
+          { text: "Delete", onPress: () => deleteItem(item), style: "destructive" }
+        ]
+      );
     }
   };
 
